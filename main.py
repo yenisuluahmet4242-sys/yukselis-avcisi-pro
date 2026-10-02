@@ -7,12 +7,12 @@ BINANCE_URL = "https://fapi.binance.com/fapi/v1/time"
 async def main():
     async with aiohttp.ClientSession() as session:
         async with session.get(BINANCE_URL) as response:
-            data = await response.json()
+            print("HTTP durum kodu:", response.status)
 
-            print("Yükseliş Avcısı PRO")
-            print("-------------------")
-            print("Binance bağlantısı başarılı!")
-            print("Binance server time:", data["serverTime"])
+            data = await response.text()
+
+            print("Binance cevabı:")
+            print(data)
 
 
 if __name__ == "__main__":
