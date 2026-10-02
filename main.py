@@ -9,25 +9,10 @@ async def main():
         async with session.get(BINANCE_URL) as response:
             print("HTTP durum kodu:", response.status)
 
-            data = await response.json()
+            data = await response.text()
 
-            symbols = []
-
-            for item in data["symbols"]:
-                if (
-                    item["status"] == "TRADING"
-                    and item["contractType"] == "PERPETUAL"
-                    and item["quoteAsset"] == "USDT"
-                ):
-                    symbols.append(item["symbol"])
-
-            print("Yükseliş Avcısı PRO")
-            print("-------------------")
-            print("Toplam USDT perpetual:", len(symbols))
-            print("İlk 20 coin:")
-
-            for symbol in symbols[:20]:
-                print(symbol)
+            print("Binance cevabı:")
+            print(data)
 
 
 if __name__ == "__main__":
